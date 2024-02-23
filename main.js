@@ -9,16 +9,16 @@ const light = new THREE.SpotLight()
 light.position.set(20, 20, 20)
 scene.add(light)
 
-const material = new THREE.MeshPhongMaterial({ color: 0x00ff00, specular: 0x111111, shininess: 200 });
+const my_material = new THREE.MeshPhongMaterial({ color: 0x00ff00, specular: 0x111111, shininess: 200 });
 
 
 // STL Loader
-const loader = new STLLoader()
+const my_loader = new STLLoader()
 
-loader.load(
+my_loader.load(
     'test.stl',
     function (geometry) {
-        const mesh = new THREE.Mesh(geometry, material)
+        const mesh = new THREE.Mesh(geometry, my_material)
         scene.add(mesh)
     },
     (xhr) => {
@@ -30,12 +30,7 @@ loader.load(
 )
 
 // Renderer
-const renderer = new THREE.WebGLRenderer({antialias: true});
-renderer.setClearColor("#233143"); // Set background colour
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement); // Add renderer to HTML as a canvas element
-
-const renderer = new THREE.WebGLRenderer()
+const renderer = new THREE.WebGLRenderer({antialias: true})
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 
