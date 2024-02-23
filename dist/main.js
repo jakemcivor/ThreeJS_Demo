@@ -15,7 +15,7 @@ const material = new THREE.MeshPhongMaterial({ color: 0x00ff00, specular: 0x1111
 // STL Loader
 const loader = new STLLoader()
 loader.load(
-    'models/test.stl',
+    'test.stl',
     function (geometry) {
         const mesh = new THREE.Mesh(geometry, material)
         scene.add(mesh)
