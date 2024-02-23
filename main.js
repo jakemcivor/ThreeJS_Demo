@@ -1,6 +1,5 @@
 import * as THREE from 'https://unpkg.com/three@0.127.0/build/three.module.js';
 import { TrackballControls } from 'https://unpkg.com/three@0.127.0/examples/jsm/controls/TrackballControls.js';
-import { STLLoader } from 'three/examples/jsm/loaders/STLLoader'
 
 // Scene
 const scene = new THREE.Scene();
@@ -8,25 +7,6 @@ const scene = new THREE.Scene();
 // Camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.6, 1200);
 camera.position.z = 5; // Set camera position
-
-const material = new THREE.MeshPhongMaterial({ color: 0x00ff00, specular: 0x111111, shininess: 200 });
-
-
-// STL Loader
-const loader = new STLLoader()
-loader.load(
-    'test.stl',
-    function (geometry) {
-        const mesh = new THREE.Mesh(geometry, material)
-        scene.add(mesh)
-    },
-    (xhr) => {
-        console.log((xhr.loaded / xhr.total ) * 100 + '% loaded')
-    },
-    (error) => {
-        console.log(error)
-    }
-)
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({antialias: true});
@@ -41,6 +21,22 @@ window.addEventListener('resize', () => {
     camera.updateProjectionMatrix(); // Apply changes
 })
 
+// Create box:
+const boxGeometry = new THREE.BoxGeometry(2, 2, 2); // Define geometry
+const boxMaterial = new THREE.MeshLambertMaterial({color: 0xFFFFFF}); // Define material
+const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial); // Build box
+boxMesh.rotation.set(40, 0, 40); // Set box initial rotation
+scene.add(boxMesh); // Add box to canvas
+
+// Create spheres: 
+const sphereMeshes = [];
+const sphereGeometry = new THREE.SphereGeometry(0.1, 32, 32); // Define geometry
+const sphereMaterial = new THREE.MeshLambertMaterial({color: 0xC56CEF}); // Define material
+for (let i=0; i<4; i++) {
+    sphereMeshes[i] = new THREE.Mesh(sphereGeometry, sphereMaterial); // Build sphere
+    sphereMeshes[i].position.set(0, 0, 0);
+    scene.add(sphereMeshes[i]); // Add sphere to canvas
+}
 
 // Lights
 const lights = []; // Storage for lights
@@ -106,6 +102,12 @@ const rendering = function() {
         {x: Math.cos(theta*1.25), y: Math.cos(theta*1.25), z: Math.sin(theta*1.25), r: 2.5},
         {x: Math.sin(theta*0.6), y: Math.cos(theta*0.6), z: Math.sin(theta*0), r: 2.75}
     ];
+// Loop 4 times (for each sphere), updating the position 
+    for (let i=0; i<4; i++) {
+        sphereMeshes[i].position.x = trigs[i]['r'] * trigs[i]['x'];
+        sphereMeshes[i].position.y = trigs[i]['r'] * trigs[i]['y'];
+        sphereMeshes[i].position.z = trigs[i]['r'] * trigs[i]['z'];
+    };
 renderer.render(scene, camera);
 }
 
