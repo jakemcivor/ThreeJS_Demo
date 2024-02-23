@@ -1,5 +1,6 @@
 import * as THREE from 'https://unpkg.com/three@0.127.0/build/three.module.js';
 import { TrackballControls } from 'https://unpkg.com/three@0.127.0/examples/jsm/controls/TrackballControls.js';
+import { STLLoader } from 'three/examples/jsm/loaders/STLLoader'
 
 // Scene
 const scene = new THREE.Scene();
@@ -7,6 +8,45 @@ const scene = new THREE.Scene();
 // Camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.6, 1200);
 camera.position.z = 5; // Set camera position
+
+
+
+const envTexture = new THREE.CubeTextureLoader().load([
+    'img/px_50.png',
+    'img/nx_50.png',
+    'img/py_50.png',
+    'img/ny_50.png',
+    'img/pz_50.png',
+    'img/nz_50.png'
+])
+envTexture.mapping = THREE.CubeReflectionMapping
+
+const material = new THREE.MeshPhysicalMaterial({
+    color: 0xb2ffc8,
+    metalness: 0.25,
+    roughness: 0.1,
+    opacity: 1.0,
+    transparent: true,
+    transmission: 0.99,
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.25
+})
+
+// STL Loader
+const loader = new STLLoader()
+loader.load(
+    'models/test.stl'
+    function (geometry) {
+        const mesh = new THREE.Mesh(geometry, material)
+        scene.add(mesh)
+    },
+    (xhr => {
+        console.log(xhr.loaded / xhr.total ) * 100 + '% loaded')
+    },
+    (error) => {
+        console.log(error)
+    }
+)
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({antialias: true});
