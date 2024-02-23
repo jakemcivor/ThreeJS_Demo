@@ -106,12 +106,6 @@ const rendering = function() {
         {x: Math.cos(theta*1.25), y: Math.cos(theta*1.25), z: Math.sin(theta*1.25), r: 2.5},
         {x: Math.sin(theta*0.6), y: Math.cos(theta*0.6), z: Math.sin(theta*0), r: 2.75}
     ];
-// Loop 4 times (for each sphere), updating the position 
-    for (let i=0; i<4; i++) {
-        sphereMeshes[i].position.x = trigs[i]['r'] * trigs[i]['x'];
-        sphereMeshes[i].position.y = trigs[i]['r'] * trigs[i]['y'];
-        sphereMeshes[i].position.z = trigs[i]['r'] * trigs[i]['z'];
-    };
 renderer.render(scene, camera);
 }
 
