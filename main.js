@@ -1,5 +1,6 @@
 import * as THREE from 'https://unpkg.com/three@0.127.0/build/three.module.js';
 import { TrackballControls } from 'https://unpkg.com/three@0.127.0/examples/jsm/controls/TrackballControls.js';
+import { STLLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/STLLoader'
 
 // Scene
 const scene = new THREE.Scene();
@@ -7,6 +8,25 @@ const scene = new THREE.Scene();
 // Camera
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.6, 1200);
 camera.position.z = 5; // Set camera position
+
+const material = new THREE.MeshPhongMaterial({ color: 0x00ff00, specular: 0x111111, shininess: 200 });
+
+
+// STL Loader
+const loader = new STLLoader()
+loader.load(
+    'test.stl',
+    function (geometry) {
+        const mesh = new THREE.Mesh(geometry, material)
+        scene.add(mesh)
+    },
+    (xhr) => {
+        console.log((xhr.loaded / xhr.total ) * 100 + '% loaded')
+    },
+    (error) => {
+        console.log(error)
+    }
+)
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({antialias: true});
