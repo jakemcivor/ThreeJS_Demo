@@ -1,6 +1,7 @@
 import * as THREE from 'https://unpkg.com/three@0.144.0/build/three.module.js';
 import { STLLoader } from 'https://unpkg.com/three@0.144.0/examples/jsm/loaders/STLLoader.js'
 import Stats from 'https://unpkg.com/three@0.144.0/examples/jsm/libs/stats.module'
+import OrbitControls from 'https://unpkg.com/three@0.144.0/examples/jsm/controls/OrbitControls.js';
 import { TrackballControls } from 'https://unpkg.com/three@0.144.0/examples/jsm/controls/TrackballControls.js';
 
 const scene = new THREE.Scene()
@@ -9,26 +10,6 @@ scene.add(new THREE.AxesHelper(5))
 const light = new THREE.SpotLight()
 light.position.set(20, 20, 20)
 scene.add(light)
-
-const my_material = new THREE.MeshPhongMaterial({ color: 0x00ff00, specular: 0x111111, shininess: 200 });
-
-
-// STL Loader
-const my_loader = new STLLoader()
-
-my_loader.load(
-    'test.stl',
-    function (geometry) {
-        const mesh = new THREE.Mesh(geometry, my_material)
-        scene.add(mesh)
-    },
-    (xhr) => {
-        console.log((xhr.loaded / xhr.total ) * 100 + '% loaded')
-    },
-    (error) => {
-        console.log(error)
-    }
-)
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({antialias: true})
