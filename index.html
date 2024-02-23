@@ -6,6 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>three.js GitHub Pages Demo Project</title>
     <link rel="stylesheet" href="main.css">
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "./build/three.module.js",
+                "three/examples/jsm/controls/OrbitControls":"./jsm/controls/OrbitControls.js",
+                "three/examples/jsm/libs/stats.module":"./jsm/libs/stats.module.js",
+            }
+        }
+    </script>
 </head>
 <body>
     <canvas class="webgl"></canvas>
