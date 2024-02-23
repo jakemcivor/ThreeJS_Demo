@@ -19,29 +19,20 @@ const envTexture = new THREE.CubeTextureLoader().load([
     'img/pz_50.png',
     'img/nz_50.png'
 ])
-envTexture.mapping = THREE.CubeReflectionMapping
 
-const material = new THREE.MeshPhysicalMaterial({
-    color: 0xb2ffc8,
-    metalness: 0.25,
-    roughness: 0.1,
-    opacity: 1.0,
-    transparent: true,
-    transmission: 0.99,
-    clearcoat: 1.0,
-    clearcoatRoughness: 0.25
-})
+const material = new THREE.MeshPhongMaterial({ color: 0x00ff00, specular: 0x111111, shininess: 200 });
+
 
 // STL Loader
 const loader = new STLLoader()
 loader.load(
-    'models/test.stl'
+    'models/test.stl',
     function (geometry) {
         const mesh = new THREE.Mesh(geometry, material)
         scene.add(mesh)
     },
     (xhr => {
-        console.log(xhr.loaded / xhr.total ) * 100 + '% loaded')
+        console.log((xhr.loaded / xhr.total ) * 100 + '% loaded')
     },
     (error) => {
         console.log(error)
