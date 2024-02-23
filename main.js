@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 //import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
-import { STLLoader } from 'three/examples/jsm/loaders/STLLoader.js'
+import { STLLoader } from 'three/examples/jsm/loaders/STLLoader'
 
 const scene = new THREE.Scene()
 scene.add(new THREE.AxesHelper(5))
