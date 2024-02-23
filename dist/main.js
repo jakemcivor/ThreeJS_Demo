@@ -1,5 +1,5 @@
-import * as THREE from '../node_modules/three/build/three.module.js';
-import { TrackballControls } from '../node_modules/three/examples/jsm/controls/TrackballControls.js';
+import * as THREE from 'https://unpkg.com/three@0.127.0/build/three.module.js';
+import { TrackballControls } from 'https://unpkg.com/three@0.127.0/examples/jsm/controls/TrackballControls.js';
 
 // Scene
 const scene = new THREE.Scene();
