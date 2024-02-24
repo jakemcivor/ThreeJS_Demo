@@ -1,8 +1,8 @@
-import * as THREE from 'https://unpkg.com/three@0.144.0/build/three.module.js';
-import { STLLoader } from 'https://unpkg.com/three@0.144.0/examples/jsm/loaders/STLLoader.js'
-import Stats from 'https://unpkg.com/three@0.144.0/examples/jsm/libs/stats.module'
-import { OrbitControls } from 'https://unpkg.com/three@0.144.0/examples/jsm/controls/OrbitControls.js';
-import { TrackballControls } from 'https://unpkg.com/three@0.144.0/examples/jsm/controls/TrackballControls.js';
+import * as THREE from 'https://unpkg.com/three@0.161.0/build/three.module.js';
+import { STLLoader } from 'https://unpkg.com/three@0.161.0/examples/jsm/loaders/STLLoader.js'
+import Stats from 'https://unpkg.com/three@0.161.0/examples/jsm/libs/stats.module'
+import { OrbitControls } from 'https://unpkg.com/three@0.161.0/examples/jsm/controls/OrbitControls.js';
+import { TrackballControls } from 'https://unpkg.com/three@0.161.0/examples/jsm/controls/TrackballControls.js';
 
 const scene = new THREE.Scene()
 scene.add(new THREE.AxesHelper(5))
